@@ -1,0 +1,40 @@
+{
+	"root": true,
+	"extends": [
+		"@techmmunity/eslint-config/common",
+		"@techmmunity/eslint-config/ts-react"
+	],
+	"rules": {
+		"capitalized-comments": 0,
+		"@next/next/no-img-element": 0,
+		"import-helpers/order-imports": [
+			"warn",
+			{
+				"newlinesBetween": "always",
+				"groups": [
+					"/next/",
+					"/react/",
+					"/styled-components/",
+					"module",
+					"/pages/",
+					"/web/components/",
+					"/components/",
+					"/contexts/",
+					"/hooks/",
+					"/assets/",
+					"/configs/",
+					"/helpers/",
+					"/layouts/",
+					"/utils/",
+					"/types/",
+					"/styles/",
+					["parent", "sibling", "index"]
+				],
+				"alphabetize": {
+					"order": "asc",
+					"ignoreCase": true
+				}
+			}
+		]
+	}
+}
