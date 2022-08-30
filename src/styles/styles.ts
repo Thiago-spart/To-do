@@ -34,4 +34,4 @@ export const GlobalStyles = createGlobalStyle`
 	button, .checkmark {
 		cursor: pointer;
 	}
-`
+`;
