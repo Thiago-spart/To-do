@@ -1,20 +1,15 @@
 import { useState } from "react";
 
-import "../styles/tasklist.scss";
+import * as S from "./styled";
 
 import { FiTrash, FiCheckSquare } from "react-icons/fi";
+import { Task } from "./types";
 
-interface Task {
-  id: number;
-  title: string;
-  isComplete: boolean;
-}
-
-export function TaskList() {
-  const [tasks, setTasks] = useState<Task[]>([]);
+export const TaskList: React.FC = () => {
+  const [tasks, setTasks] = useState<Array<Task>>([]);
   const [newTaskTitle, setNewTaskTitle] = useState("");
 
-  function handleCreateNewTask() {
+  const handleCreateNewTask = () => {
     if (!newTaskTitle) return;
 
     const newTask = {
@@ -27,8 +22,7 @@ export function TaskList() {
     setNewTaskTitle("");
   }
 
-  function handleToggleTaskCompletion(id: number) {
-    // Altere entre `true` ou `false` o campo `isComplete` de uma task com dado ID
+  const handleToggleTaskCompletion = (id: number) => {
     const newTasks = tasks.map(task =>
       task.id === id
         ? {
@@ -40,18 +34,17 @@ export function TaskList() {
     setTasks(newTasks);
   }
 
-  function handleRemoveTask(id: number) {
-    // Remova uma task da listagem pelo ID
+  const handleRemoveTask = (id: number) => {
     const removedTask = tasks.filter(task => task.id !== id);
     setTasks(removedTask);
   }
 
   return (
-    <section className="task-list container">
+    <S.Container>
       <header>
         <h2>Minhas tasks</h2>
 
-        <div className="input-group">
+        <S.InputGroup>
           <input
             type="text"
             placeholder="Adicionar novo todo"
@@ -60,45 +53,41 @@ export function TaskList() {
           />
           <button
             type="submit"
-            data-testid="add-task-button"
             onClick={handleCreateNewTask}
           >
-            <FiCheckSquare size={16} color="#fff" />
+            <FiCheckSquare />
           </button>
-        </div>
+        </S.InputGroup>
       </header>
 
-      <main>
+      <S.TaskListContainer>
         <ul>
           {tasks.map(task => (
-            <li key={task.id}>
-              <div
-                className={task.isComplete ? "completed" : ""}
-                data-testid="task"
-              >
-                <label className="checkbox-container">
+            <S.TaskItem isComplete={task.isComplete} key={task.id}>
+              <div>
+                <S.CheckBoxContainer>
                   <input
                     type="checkbox"
                     readOnly
                     checked={task.isComplete}
                     onClick={() => handleToggleTaskCompletion(task.id)}
                   />
-                  <span className="checkmark"></span>
-                </label>
+                  <span aria-details="checkbox" />
+                </S.CheckBoxContainer>
                 <p>{task.title}</p>
               </div>
 
               <button
                 type="button"
-                data-testid="remove-task-button"
+								about="delete task"
                 onClick={() => handleRemoveTask(task.id)}
               >
-                <FiTrash size={16} />
+                <FiTrash />
               </button>
-            </li>
+            </S.TaskItem>
           ))}
         </ul>
-      </main>
-    </section>
+      </S.TaskListContainer>
+    </S.Container>
   );
 }

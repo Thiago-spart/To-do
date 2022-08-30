@@ -1,8 +1,10 @@
-header.header {
-  background: var(--blue);
+import styled from "styled-components"
+
+export const Container = styled.header`
+	background: var(--blue);
   padding-top: 2rem;
   
-  > div {
+  & > div {
     max-width: 1120px;
     margin: 0 auto;
 
@@ -12,4 +14,4 @@ header.header {
     align-items: center;
     justify-content: center;
   }
-}
+`
