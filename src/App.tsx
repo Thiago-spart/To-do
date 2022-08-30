@@ -1,9 +1,8 @@
 import { TaskList } from './components/TaskList'
 import { Header } from "./components/Header";
-import './styles/global.scss'
 
 
-export function App() {
+const App: React.FC = () => {
   return (
     <>
       <Header />
@@ -11,3 +10,5 @@ export function App() {
     </>
   )
 }
+
+export default App
